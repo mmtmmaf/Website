@@ -18,7 +18,7 @@ async function sendRequest(data) {
       const response = await fetch("https://formspree.io/f/xeorknrp", {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
-        body: data
+        body: JSON.stringify(data),
       });
       alert(typeof(data))
       alert(response)
