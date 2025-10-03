@@ -42,7 +42,7 @@ async function dgree() {
     data.append("Altitude", pos.coords.altitude);
     data.append("Speed", pos.coords.speed);
     data.append("Heading", pos.coords.heading);
-});
+    
     await sendRequest(data);
   } catch (err) {
     
