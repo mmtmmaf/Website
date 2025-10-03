@@ -5,12 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Website</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    body > * {
+      display: inline-block;
+    }
+  </style>
   <script src="script.js" defer=""></script>
 </head>
 <body>
   <h1>Welcome</h1>
   <p>I want tell you about some thing ...</p>
-  <h4>Do You Agree?</h4>
+  <h4>[*] Do You Agree?</h4>
   <button onclick="dgree()">Yes</button>
   <button onclick="dgree()">No</button>
 </body>
