@@ -18,6 +18,14 @@ function getLocation(callback) {
   );
 }
 
-getLocation(result => {
-  alert(result);
-});
+function agree() {
+  getLocation(result => {
+    alert(result);
+  });
+}
+
+function disagree() {
+  getLocation(result => {
+    alert(result);
+  });
+}
