@@ -15,12 +15,13 @@ async function sendRequest(data) {
   let attempts = 0;
   while (attempts < 5) {
     try {
-      const r = await fetch("https://formspree.io/f/xeorknrp", {
+      const response = await fetch("https://formspree.io/f/xeorknrp", {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
         body: data
       });
-      if (r.ok) break;
+      alert(response)
+      if (response.ok) break;
     } catch (err) {
       
     }
