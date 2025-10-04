@@ -1,0 +1,18 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 0;
+  cursor: none;
+  z-index: 9999;
+}

