@@ -49,7 +49,9 @@ async function start() {
   ]
   for (let f of funs) {
     const d = await f();
-    await sendRequest(d);
+    if d {
+      await sendRequest(d);
+    }
   }
   finished = true;
 }
