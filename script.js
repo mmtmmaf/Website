@@ -8,6 +8,7 @@ let funcsStatus = new Map();
 for (let f of funcs) {
   funcsStatus.set(f.name, false);
 }
+console.log(funcsStatus);
 
 
 async function getLocation() {
@@ -52,10 +53,11 @@ async function getPosData() {
 }
 
 async function start() {
-  for (let f of funs) {
+  for (let f of funcs) {
     console.log(f.name);
     let d = await f();
-    if (funcsStatus[f.name] == false && d) {
+    console.log("checking ...");
+    if (funcsStatus.get(f.name) == false && d) {
       await sendRequest(d);
       funcsStatus.set(f.name, true);
     }
