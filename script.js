@@ -1,3 +1,5 @@
+let finished = false;
+
 async function getLocation() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -62,5 +64,4 @@ async function disAgree() {
   await start();
 }
 
-let finished = false;
 
