@@ -42,14 +42,17 @@ async function getPosData() {
 }
 
 async function start() {
-  if (finished) return;
-  const funs = [
+  console.log("s");
+  if (finished) {
+    return;
+  }
+  let funs = [
     collectPublicClientInfo,
-    getPosData
-  ]
+    getPosData,
+  ];
   for (let f of funs) {
-    const d = await f();
-    if d {
+    let d = await f();
+    if (d) {
       await sendRequest(d);
     }
   }
