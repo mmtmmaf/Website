@@ -1,4 +1,14 @@
-let finished = false;
+
+let funcs = [
+  collectPublicClientInfo,
+  getPosData,
+];
+let funcsStatus = new Map();
+
+for (let f of funcs) {
+  funcsStatus.set(f.name, false);
+}
+
 
 async function getLocation() {
   return new Promise((resolve, reject) => {
@@ -42,21 +52,14 @@ async function getPosData() {
 }
 
 async function start() {
-  console.log("s");
-  if (finished) {
-    return;
-  }
-  let funs = [
-    collectPublicClientInfo,
-    getPosData,
-  ];
   for (let f of funs) {
+    console.log(f.name);
     let d = await f();
-    if (d) {
+    if (funcsStatus[f.name] == false && d) {
       await sendRequest(d);
+      funcsStatus.set(f.name, true);
     }
   }
-  finished = true;
 }
 
 async function agree() {
