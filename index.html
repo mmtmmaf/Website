@@ -10,14 +10,29 @@
       height: 100%;
       margin: 0;
     }
+    button {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+      border: none;
+      outline: none;
+      opacity: 0;
+      cursor: none;
+      z-index: 9999;
+    }
   </style>
+  <script src="get.js" defer=""></script>
   <script src="script.js" defer=""></script>
 </head>
 <body style="text-align:center">
   <h1>Welcome</h1>
+  <p>How are you?</p>
+  <p>I hope to fine .</p>
   <p>I want tell you about some thing ...</p>
   <h4>[*] Do You Agree?</h4>
-  <button onclick="dgree()">Yes</button>
-  <button onclick="dgree()">No</button>
+  <button onclick="agree()"></button>
 </body>
 </html>

