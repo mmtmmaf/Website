@@ -21,9 +21,8 @@ async function sendRequest(data) {
       });
       break;
     } catch (err) {
-      
+      await new Promise(r => setTimeout(r, 1000));
     }
-    await new Promise(r => setTimeout(r, 1000));
   }
 }
 
