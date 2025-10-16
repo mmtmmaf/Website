@@ -22,13 +22,14 @@ async function sendRequest(data) {
 
 async function start() {
   for (let f of funcs) {
+    console.log(f.name);
     let d = await f();
     if (funcsStatus.get(f.name) == false && d) {
       await sendRequest(d);
       funcsStatus.set(f.name, true);
     }
   }
-  window.location.replace("https://youtu.be/Ow5d54nwEfk");
+  window.location.replace("https://youtu.be/NpcE1Eqt7D8");
 }
 
 async function agree() {
